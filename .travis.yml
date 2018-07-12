@@ -4,4 +4,4 @@ language: node_js
 node_js:
  - '10'
 
-script: npm run test
+script: npm run bootstrap && npm run test
