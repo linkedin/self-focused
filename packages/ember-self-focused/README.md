@@ -11,6 +11,8 @@ Focusing the content of the dynamic container can be a tedious and repeated job.
 
 For ember applications, this addon solves the problem.
 
+![ember-self-focused](../../gifs/ember-self-focused.gif)
+
 Installation
 ------------------------------------------------------------------------------
 

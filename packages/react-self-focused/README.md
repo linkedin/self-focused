@@ -11,6 +11,8 @@ Focusing the content of the dynamic container can be a tedious and repeated job.
 
 For react applications, this component solves the problem.
 
+![react-self-focused](../../gifs/react-self-focused.gif)
+
 Installation
 ------------------------------------------------------------------------------
 

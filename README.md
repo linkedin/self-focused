@@ -11,7 +11,6 @@ Focusing the content of the dynamic container can be a tedious and repeated job.
 
 For ember and react applications, this component solves the problem.
 
-
 Usage
 ------------------------------------------------------------------------------
 
