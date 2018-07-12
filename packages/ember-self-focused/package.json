@@ -5,7 +5,10 @@
   "keywords": [
     "ember-addon", "a11y", "accessibility", "spa", "single page application"
   ],
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git@gitli.corp.linkedin.com:sarbbottam/self-focused.git"
+  },
   "license": "BSD-2-Clause",
   "author": "Sarbbottam Bandyopadhyay",
   "scripts": {

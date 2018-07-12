@@ -1,13 +1,22 @@
 {
   "name": "self-focused",
-  "description": "self-focused component for ember/react et al",
-  "version": "0.0.0",
   "private": "true",
+  "version": "0.0.0",
+  "description": "self-focused component for ember/react et al",
+  "keywords": [
+    "ember", "react", "component", "a11y", "accessibility", "spa", "single page application"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@gitli.corp.linkedin.com:sarbbottam/self-focused.git"
+  },
+  "license": "BSD-2-Clause",
+  "author": "Sarbbottam Bandyopadhyay",
   "scripts": {
-		"bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap",
     "test": "lerna run test"
   },
   "devDependencies": {
-		"lerna": "^2.11.0"
-	}
+    "lerna": "^2.11.0"
+  }
 }
