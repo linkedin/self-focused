@@ -1,0 +1,68 @@
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Compass and Scss cache #
+##########################
+.sass-cache/
+
+# Node #
+########
+node_modules
+
+# Coverage #
+############
+JSCover # jscoverage
+lib-cov # jscoverage
+coverage #istanbul
+
+# Logs and databases #
+######################
+logs
+*.log
+*.sql
+*.sqlite
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# ember#
+########
+dist
+tmp
+vendor
+build
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Runtime data #
+################
+pids
+*.pid
+*.seed
+
+# ember-try #
+#############
+.node_modules.ember-try/
+package.json.ember-try

@@ -1,0 +1,51 @@
+{
+  "name": "ember-self-focused",
+  "version": "0.0.0",
+  "description": "make an ember application screen reader friendly",
+  "keywords": [
+    "ember-addon", "a11y", "accessibility", "spa", "single page application"
+  ],
+  "repository": "",
+  "license": "BSD-2-Clause",
+  "author": "Sarbbottam Bandyopadhyay",
+  "scripts": {
+    "build": "ember build",
+    "lint": "eslint ./*.js addon app tests",
+    "start": "ember serve",
+    "test": "npm run lint && ember try:each"
+  },
+  "dependencies": {
+    "ember-cli-babel": "^6.6.0",
+    "ember-cli-htmlbars": "^2.0.3"
+  },
+  "devDependencies": {
+    "broccoli-asset-rev": "^2.4.5",
+    "ember-ajax": "^3.0.0",
+    "ember-cli": "~3.2.0",
+    "ember-cli-dependency-checker": "^2.0.0",
+    "ember-cli-htmlbars-inline-precompile": "^1.0.0",
+    "ember-cli-inject-live-reload": "^1.4.1",
+    "ember-cli-qunit": "^4.1.1",
+    "ember-cli-shims": "^1.2.0",
+    "ember-cli-sri": "^2.1.0",
+    "ember-cli-uglify": "^2.0.0",
+    "ember-disable-prototype-extensions": "^1.1.2",
+    "ember-export-application-global": "^2.0.0",
+    "ember-load-initializers": "^1.0.0",
+    "ember-maybe-import-regenerator": "^0.1.6",
+    "ember-resolver": "^4.0.0",
+    "ember-source": "~3.2.2",
+    "ember-source-channel-url": "^1.0.1",
+    "ember-try": "^0.2.23",
+    "eslint": "^5.1.0",
+    "eslint-plugin-ember": "^5.0.0",
+    "eslint-plugin-node": "^6.0.1",
+    "loader.js": "^4.2.3"
+  },
+  "engines": {
+    "node": "^4.5 || 6.* || >= 7.*"
+  },
+  "ember-addon": {
+    "configPath": "tests/dummy/config"
+  }
+}

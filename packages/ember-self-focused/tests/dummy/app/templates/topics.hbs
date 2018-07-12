@@ -1,0 +1,16 @@
+{{#self-focused}}
+  <h2>Topics</h2>
+  <ul>
+   <li>
+      {{#link-to 'topics.topic' 'component'}}
+        Components
+      {{/link-to}}
+    </li>
+    <li>
+      {{#link-to 'topics.topic' 'router'}}
+        Router
+      {{/link-to}}
+    </li>
+  </ul>
+  {{outlet}}
+{{/self-focused}}
