@@ -30,8 +30,14 @@ class FocusManager {
       const setFocus = function () {
         requestAnimationFrame(() => {
           if (nodeToBeFocused) {
+            // save current scroll position so setting focus does not
+            // disrupt the user's placement on the page
+            const scrollX = window.pageXOffset;
+            const scrollY = window.pageYOffset;
             nodeToBeFocused.setAttribute('tabindex', '-1');
             nodeToBeFocused.focus();
+            // after setting focus, scroll back to the place where the user was previously
+            window.scrollTo(scrollX, scrollY);
             // mouse click on a element with tabindex=-1 focues the element
             // thus removing the tabindex on blur or click
             nodeToBeFocused.addEventListener('blur', removeTabIndex);
