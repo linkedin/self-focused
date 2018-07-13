@@ -24,6 +24,7 @@ Contributing
 
 * `git clone <repository-url>`
 * `cd self-focused`
+* `npm i`
 * `npm run bootstrap`
 
 
