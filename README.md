@@ -17,6 +17,35 @@ Usage
 - [ember-self-focused](packages/ember-self-focused/README.md)
 - [react-self-focused](packages/react-self-focused/README.md)
 
+Contributing
+------------------------------------------------------------------------------
+
+### Installation
+
+* `git clone <repository-url>`
+* `cd self-focused`
+* `npm run bootstrap`
+
+
+### Running tests for all the packages
+
+* `npm test`
+
+### Running the dummy/example application in all the packages
+
+* `npm start`
+* Visit the dummy application at [http://localhost:4200](http://localhost:4200).
+* Visit the example application at [http://localhost:8080](http://localhost:8080).
+
+### Running tests
+
+* `npm t`
+
+### Running the example application
+
+* `npm start`
+* Visit the example application at [http://localhost:8080](http://localhost:8080).
+
 License
 ------------------------------------------------------------------------------
 

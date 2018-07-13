@@ -84,13 +84,6 @@ Implementation overview
 Contributing
 ------------------------------------------------------------------------------
 
-### Installation
-
-* `git clone <repository-url>`
-* `cd react-self-focused`
-* `npm install`
-
-
 ### Running tests
 
 * `npm t`

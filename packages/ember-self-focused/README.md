@@ -87,12 +87,6 @@ Implementation overview
 Contributing
 ------------------------------------------------------------------------------
 
-### Installation
-
-* `git clone <repository-url>`
-* `cd ember-self-focused`
-* `npm install`
-
 ### Running tests
 
 * `ember test` – Runs the test suite on the current Ember version
