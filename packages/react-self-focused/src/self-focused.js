@@ -6,10 +6,10 @@ class SelfFocused extends React.Component {
     super(props);
     this.ref = React.createRef();
     this.focusManager = new FocusManager();
-    this.focusManager.updateIsFirstRender();
   }
 
   render() {
+    this.focusManager.updateIsFirstRender();
     return <div className="self-focused" ref={this.ref}>{this.props.children}</div>;
   }
 
