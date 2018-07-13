@@ -22,7 +22,7 @@ Contributing
 
 ### Installation
 
-* `git clone <repository-url>`
+* `git clone git@gitli.corp.linkedin.com:sarbbottam/self-focused.git`
 * `cd self-focused`
 * `npm i`
 * `npm run bootstrap`
