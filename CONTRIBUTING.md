@@ -15,7 +15,27 @@ Please do not file reports on Github for security issues.  Please
 review the guidelines on at (link to more info).  Reports should be
 encrypted using PGP (link to PGP key) and sent to
 security@linkedin.com preferably with the title "Github
-linkedin/<project> - <short summary>".
+linkedin/self-focused - <short summary>".
+
+Getting Started
+===============
+
+## Installation
+
+* `git clone git@gitli.corp.linkedin.com:sarbbottam/self-focused.git`
+* `cd self-focused`
+* `npm install`
+* `npm run bootstrap`
+
+## Running tests for all the packages
+
+* `npm test`
+
+## Running the dummy/example application in all the packages
+
+* `npm start`
+* Visit the dummy application at [http://localhost:4200](http://localhost:4200).
+* Visit the example application at [http://localhost:8080](http://localhost:8080).
 
 Tips for Getting Your Pull Request Accepted
 ===========================================

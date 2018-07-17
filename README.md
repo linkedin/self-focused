@@ -20,32 +20,7 @@ Usage
 Contributing
 ------------------------------------------------------------------------------
 
-### Installation
-
-* `git clone git@gitli.corp.linkedin.com:sarbbottam/self-focused.git`
-* `cd self-focused`
-* `npm i`
-* `npm run bootstrap`
-
-
-### Running tests for all the packages
-
-* `npm test`
-
-### Running the dummy/example application in all the packages
-
-* `npm start`
-* Visit the dummy application at [http://localhost:4200](http://localhost:4200).
-* Visit the example application at [http://localhost:8080](http://localhost:8080).
-
-### Running tests
-
-* `npm t`
-
-### Running the example application
-
-* `npm start`
-* Visit the example application at [http://localhost:8080](http://localhost:8080).
+Please refer [CONTRIBUTING.md](CONTRIBUTING.md)
 
 License
 ------------------------------------------------------------------------------
