@@ -3,8 +3,14 @@
   "version": "0.0.0",
   "description": "make an ember application screen reader friendly",
   "keywords": [
-    "react", "component", "a11y", "accessibility", "spa", "single page application"
+    "react",
+    "component",
+    "a11y",
+    "accessibility",
+    "spa",
+    "single page application"
   ],
+  "main": "build/self-focused.js",
   "repository": {
     "type": "git",
     "url": "git@gitli.corp.linkedin.com:sarbbottam/self-focused.git"
@@ -12,6 +18,7 @@
   "license": "BSD-2-Clause",
   "author": "Sarbbottam Bandyopadhyay",
   "scripts": {
+    "preversion": "babel --out-dir build src",
     "start": "webpack-dev-server --content-base=example",
     "test": "mocha --require babel-register test/*.test.js"
   },

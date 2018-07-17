@@ -38,12 +38,13 @@ logs
 *.o
 *.so
 
-# ember#
-########
+# ember & generated #
+#####################
 dist
 tmp
 vendor
 build
+**/example/index.js
 
 # Packages #
 ############

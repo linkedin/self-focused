@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "description": "make an ember application screen reader friendly",
   "keywords": [
-    "ember-addon", "a11y", "accessibility", "spa", "single page application"
+    "ember-addon",
+    "a11y",
+    "accessibility",
+    "spa",
+    "single page application"
   ],
   "repository": {
     "type": "git",
