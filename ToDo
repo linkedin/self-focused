@@ -1,5 +1,0 @@
-lint react-self-focused; use xo
-add npmignore to react-self-focused
-react-self-focused update scripts to clean build dir
-
-remove *Note: These are suggestions. Customize as needed.* from contri
