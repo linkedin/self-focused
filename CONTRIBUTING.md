@@ -40,8 +40,6 @@ Getting Started
 Tips for Getting Your Pull Request Accepted
 ===========================================
 
-*Note: These are suggestions. Customize as needed.*
-
 1. Make sure all new features are tested and the tests pass.
 2. Bug fixes must include a test case demonstrating the error that it
    fixes.
