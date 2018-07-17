@@ -1,8 +1,8 @@
-import { JSDOM } from 'jsdom';
-import 'raf/polyfill';
-import { expect } from 'chai';
+import {JSDOM} from 'jsdom';
+import {expect} from 'chai';
+
 const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
-const { window } = jsdom;
+const {window} = jsdom;
 
 function copyProps(src, target) {
   const props = Object.getOwnPropertyNames(src)
@@ -15,6 +15,8 @@ global.expect = expect;
 global.window = window;
 global.document = window.document;
 global.navigator = {
-  userAgent: 'node.js',
+  userAgent: 'node.js'
 };
+
+window.scrollTo = () => { /* no op */};
 copyProps(window, global);

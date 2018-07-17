@@ -1,12 +1,11 @@
-
+import raf from 'raf';
 /**
  * Focus manager
  * This is intended to be used by self-focus component
  */
 class FocusManager {
   constructor() {
-    if(!FocusManager.instance){
-
+    if (!FocusManager.instance) {
       /**
        * @property {boolean} isFirstRender - determines whether it is a first render
        * @private
@@ -20,7 +19,18 @@ class FocusManager {
       let nodeToBeFocused = null;
 
       /**
-       * if nodeToBeFocused has been set
+       * Remove tabindex attribute, blur and click eventlistener
+       * from the node
+       * @param {Object} e - event object
+       */
+      const removeTabIndex = function (e) {
+        e.currentTarget.removeAttribute('tabindex');
+        e.currentTarget.removeEventListener('blur', removeTabIndex);
+        e.currentTarget.removeEventListener('click', removeTabIndex);
+      };
+
+      /**
+       * If nodeToBeFocused has been set
        * then
        * add tabindex=-1 to the node
        * focus the node
@@ -28,17 +38,17 @@ class FocusManager {
        * update the nodeToBeFocused to `null`
        */
       const setFocus = function () {
-        requestAnimationFrame(() => {
+        raf(() => {
           if (nodeToBeFocused) {
-            // save current scroll position so setting focus does not
+            // Save current scroll position so setting focus does not
             // disrupt the user's placement on the page
             const scrollX = window.pageXOffset;
             const scrollY = window.pageYOffset;
             nodeToBeFocused.setAttribute('tabindex', '-1');
             nodeToBeFocused.focus();
-            // after setting focus, scroll back to the place where the user was previously
+            // After setting focus, scroll back to the place where the user was previously
             window.scrollTo(scrollX, scrollY);
-            // mouse click on a element with tabindex=-1 focues the element
+            // Mouse click on a element with tabindex=-1 focues the element
             // thus removing the tabindex on blur or click
             nodeToBeFocused.addEventListener('blur', removeTabIndex);
             nodeToBeFocused.addEventListener('click', removeTabIndex);
@@ -48,43 +58,34 @@ class FocusManager {
       };
 
       /**
-       * remove tabindex attribute, blur and click eventlistener
-       * from the node
-       */
-      const removeTabIndex = function(e) {
-        e.currentTarget.removeAttribute('tabindex');
-        e.currentTarget.removeEventListener('blur', removeTabIndex);
-        e.currentTarget.removeEventListener('click', removeTabIndex);
-      }
-
-      /**
        * Use this method to set isFirstRender to false.
        */
       this.updateIsFirstRender = function () {
-        if(isFirstRender) {
-          requestAnimationFrame(() => {
-            isFirstRender = false
-          })
+        if (isFirstRender) {
+          raf(() => {
+            isFirstRender = false;
+          });
         }
-      },
+      };
 
       /**
        * Use this method to set the node to be focused.
        * It will be focused if no node has already been set and is not the first render.
        *
        * @param {HTMLNode} node - node to be focused
+       * @param {string} type - type of operation mount/update
        */
       this.setNodeToBeFocused = function (node, type) {
         if (isFirstRender) {
           return;
         }
-        // mount: focus the top most mounted self-focus
+        // Mount: focus the top most mounted self-focus
         if (type === 'mount') {
           nodeToBeFocused = node;
           setFocus();
           return;
         }
-        // update: focus the bottom most updated self-focus
+        // Update: focus the bottom most updated self-focus
         if (nodeToBeFocused) {
           return;
         }

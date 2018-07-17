@@ -1,34 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import SelfFocused from '../src/self-focused';
 
-const BasicExample = () => (
-  <SelfFocused name='App'>
-    <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to='/'>Home</Link>
-          </li>
-          <li>
-            <Link to='/about'>About</Link>
-          </li>
-          <li>
-            <Link to='/topics'>Topics</Link>
-          </li>
-        </ul>
-
-        <hr />
-        <Route exact path='/' component={Home} />
-        <Route path='/about' component={About} />
-        <Route path='/topics' component={Topics} />
-      </div>
-    </Router>
-  </SelfFocused>
-);
-
 const Home = () => (
-  <SelfFocused name='Home'>
+  <SelfFocused name="Home">
     <div>
       <h2>Home</h2>
     </div>
@@ -36,15 +13,27 @@ const Home = () => (
 );
 
 const About = () => (
-  <SelfFocused name='About'>
+  <SelfFocused name="About">
     <div>
       <h2>About</h2>
     </div>
   </SelfFocused>
 );
 
-const Topics = ({ match }) => (
-  <SelfFocused name='Topics'>
+const Topic = ({match}) => (
+  <SelfFocused name={match.params.topicId}>
+    <div>
+      <h3>{match.params.topicId}</h3>
+    </div>
+  </SelfFocused>
+);
+
+Topic.propTypes = {
+  match: PropTypes.string.isRequired
+};
+
+const Topics = ({match}) => (
+  <SelfFocused name="Topics">
     <div>
       <h2>Topics</h2>
       <ul>
@@ -56,7 +45,7 @@ const Topics = ({ match }) => (
         </li>
       </ul>
 
-      <Route path={`${match.url}/:topicId`} component={Topic} />
+      <Route path={`${match.url}/:topicId`} component={Topic}/>
       <Route
         exact
         path={match.url}
@@ -66,14 +55,34 @@ const Topics = ({ match }) => (
   </SelfFocused>
 );
 
-const Topic = ({ match }) => (
-  <SelfFocused name={match.params.topicId}>
-    <div>
-      <h3>{match.params.topicId}</h3>
-    </div>
+Topics.propTypes = {
+  match: PropTypes.string.isRequired
+};
+
+const BasicExample = () => (
+  <SelfFocused name="App">
+    <Router>
+      <div>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/topics">Topics</Link>
+          </li>
+        </ul>
+
+        <hr/>
+        <Route exact path="/" component={Home}/>
+        <Route path="/about" component={About}/>
+        <Route path="/topics" component={Topics}/>
+      </div>
+    </Router>
   </SelfFocused>
 );
-
 
 ReactDOM.render(
   <BasicExample/>,

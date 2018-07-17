@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import FocusManager from './focus-manager';
 
 class SelfFocused extends React.Component {
@@ -10,7 +11,7 @@ class SelfFocused extends React.Component {
 
   render() {
     this.focusManager.updateIsFirstRender();
-    return <div className="self-focused" ref={this.ref}>{this.props.children}</div>;
+    return <div ref={this.ref} className="self-focused">{this.props.children}</div>;
   }
 
   componentDidMount() {
@@ -21,5 +22,9 @@ class SelfFocused extends React.Component {
     this.focusManager.setNodeToBeFocused(this.ref.current, 'update');
   }
 }
+
+SelfFocused.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 export default SelfFocused;
