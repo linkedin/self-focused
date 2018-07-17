@@ -25,7 +25,9 @@ Usage
 
 Wrap all the routable components by `self-focused`.
 
-```html
+```js
+import SelfFocused from 'react-self-focused';
+
 <SelfFocused>
   <!-- block to be rendered -->
 </SelfFocused>
