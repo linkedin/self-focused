@@ -1,0 +1,25 @@
+{
+  "name": "test-react-self-focused",
+  "private": true,
+  "version": "0.0.0",
+  "author": "Sarbbottam Bandyopadhyay",
+  "scripts": {
+    "start": "webpack-dev-server --content-base=example --port 8081"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^`7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "prop-types": "^15.6.2",
+    "raf": "^3.4.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4",
+    "react-self-focused": "../../packages/react-self-focused"
+  }
+}
