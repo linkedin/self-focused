@@ -1,7 +1,7 @@
 react-self-focused
 ==============================================================================
 
-Make a react application screen reader friendly.
+Helps make a react (single page) application more friendly to screen readers.
 
 The screen reader reads out the content of a web page on load or page refresh.
 In Single Page Application (SPA) there is no page refresh after the initial page load, the UI gets updated without page refresh, which makes it difficult for a screen reader user to be aware of the UI change.
@@ -36,7 +36,7 @@ import SelfFocused from 'react-self-focused';
 Since the div will be focused, it will have a focus outline/highlight, if that is not desired, please add the following styles:
 
 ```css
-.self-focused:focus{
+.self-focused:focus {
   outline: none
 }
 ```
@@ -52,7 +52,7 @@ a.active {
   color: #ffffff;
 }
 // following will serve as a visual hint for currently active link to the sighted users
-a.active after{
+a.active after {
   content: 'Currently active link.';
   font-size: 0;
 }

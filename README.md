@@ -1,7 +1,7 @@
 self-focused
 ==============================================================================
 
-Make an single page application screen reader friendly.
+Helps make a single page application more friendly to screen readers.
 
 The screen reader reads out the content of a web page on load or page refresh.
 In Single Page Application (SPA) there is no page refresh after the initial page load, the UI gets updated without page refresh, which makes it difficult for a screen reader user to be aware of the UI change.
