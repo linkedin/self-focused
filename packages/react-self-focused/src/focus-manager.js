@@ -79,13 +79,13 @@ class FocusManager {
         if (isFirstRender) {
           return;
         }
-        // Mount: focus the top most mounted self-focus
+        // Mount: focus the top most mounted self-focused div
         if (type === 'mount') {
           nodeToBeFocused = node;
           setFocus();
           return;
         }
-        // Update: focus the bottom most updated self-focus
+        // Update: focus the bottom most updated self-focused div
         if (nodeToBeFocused) {
           return;
         }
