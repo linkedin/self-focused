@@ -151,7 +151,37 @@ module('Integration | Component | self-focused', function(hooks) {
     });
   });
 
-  test('it should focus the top most self-focused div on rendering', async function(assert) {
+  test('it should focus the top most self-focused div on insert', async function(assert) {
+    await render(hbs`
+      <div id="container">
+        {{#self-focused}}
+          template block text
+        {{/self-focused}}
+      </div>
+    `);
+
+    let selfFocusedDiv = this.element.querySelector('#container > div');
+    assert.notOk(selfFocusedDiv.getAttribute('tabindex'), 'self-focused <div> does not have a tabindex property');
+    assert.equal(document.body, document.activeElement, 'document.body is the currently focused element');
+
+    await render(hbs`
+      <div id="container">
+        {{#self-focused class="one"}}
+          {{#self-focused class="two"}}
+            {{#self-focused class="three"}}
+              template block text
+            {{/self-focused}}
+          {{/self-focused}}
+        {{/self-focused}}
+      </div>
+    `);
+
+    selfFocusedDiv = this.element.querySelector('#container .one');
+    assert.equal(selfFocusedDiv.getAttribute('tabindex'), '-1', 'self-focused <div> one has a tabindex property with value -1');
+    assert.equal(selfFocusedDiv, document.activeElement, 'self-focused <div> one is the currently focused element');
+  });
+
+  test('it should focus the child most self-focused div on receiving attribute', async function(assert) {
     this.set('one', null);
     this.set('two', null);
     this.set('three', null);

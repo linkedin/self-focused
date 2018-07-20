@@ -30,15 +30,22 @@ export default Service.extend({
    *
    * @param {HTMLNode} node - node to be focused
    */
-  setNodeToBeFocused(node) {
+  setNodeToBeFocused(node, type) {
     if (this.get('isFirstRender')) {
       return;
     }
 
-    if (!this.get('nodeToBeFocused')) {
+    // Insert: focus the top most inserted self-focused div
+    if (type === 'insert') {
       this.set('nodeToBeFocused', node);
+      run.scheduleOnce('afterRender', this, this._setFocus);
+      return;
     }
-
+    // Attr: focus the bottom most updated self-focused div
+    if (this.get('nodeToBeFocused')) {
+      return;
+    }
+    this.set('nodeToBeFocused', node);
     run.scheduleOnce('afterRender', this, this._setFocus);
   },
 
@@ -46,7 +53,7 @@ export default Service.extend({
    * Use this method to set isFirstRender to false.
    */
   updateIsFirstRender() {
-    if(this.get('isFirstRender')) {
+    if (this.get('isFirstRender')) {
       run.scheduleOnce('afterRender', this, function() {
         this.set('isFirstRender', false);
       });
