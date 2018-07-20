@@ -41,7 +41,7 @@ export default Service.extend({
       run.scheduleOnce('afterRender', this, this._setFocus);
       return;
     }
-    // Attr: focus the bottom most updated self-focused div
+    // Attr: focus the child most updated self-focused div
     if (this.get('nodeToBeFocused')) {
       return;
     }

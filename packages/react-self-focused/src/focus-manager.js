@@ -85,7 +85,7 @@ class FocusManager {
           setFocus();
           return;
         }
-        // Update: focus the bottom most updated self-focused div
+        // Update: focus the child most updated self-focused div
         if (nodeToBeFocused) {
           return;
         }
