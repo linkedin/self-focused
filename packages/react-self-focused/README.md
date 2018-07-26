@@ -81,7 +81,7 @@ Implementation overview
       - verifies the state of `isFirstRender` and if `isFirstRender` is `true`, which is the case for very first invocation, it bails out.
       - if type is `mount` it updates `nodeToBeFocused` with the passed HTML node, and schedules the private `setFocus` method
       - if type is other than `mount` and `nodeToBeFocused` is not `null`, it bails out.
-      - otherwise, it updates `nodeToBeFocused` with the passed HTML node, and schedules the private `setFocus` method, in the `afterRender` queue.
+      - otherwise, it updates `nodeToBeFocused` with the passed HTML node, and schedules the private `setFocus` method with `requestAnimationFrame()`.
 
 Contributing
 ------------------------------------------------------------------------------

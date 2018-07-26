@@ -64,7 +64,7 @@ Implementation overview
 
 - `self-focused` component
   - on initialization invokes `updateIsFirstRender` method of the `focus-manager` service.
-  - on `render` invokes the `setNodeToBeFocused` method of the `focus-manager` service, passing the self HTML node as the argument.
+  - on `didInsertElement` and `didReceiveAttrs` invokes the `setNodeToBeFocused` method of the `focus-manager`, passing the self HTML node and the type of operation (`insert` or `attr`) as the arguments.
 - `focus-manager` service carries out the functionality of focusing the desired node.
   - `focus-manager` utilizes two state variables, namely `isFirstRender` and `nodeToBeFocused`.
     - initial value of the `isFirstRender` is set to `true`
@@ -79,10 +79,11 @@ Implementation overview
   - `focus-manager` service exposes  two methods, namely `updateIsFirstRender` and `setNodeToBeFocused`, which are consumed by `self-focused` component.
     - `updateIsFirstRender` sets `isFirstRender` to `false` if it is not already.
     - `setNodeToBeFocused` method
-      - accepts a HTML node as an argument.
+      - accepts a HTML node and type as arguments.
       - verifies the state of `isFirstRender` and if `isFirstRender` is `true`, which is the case for very first invocation, it bails out.
-      - if `nodeToBeFocused` is not `null`, it bails out.
-      - otherwise, it updates `nodeToBeFocused` with the passed argument, and schedules the private `_setFocus` method, in the `afterRender` queue.
+      - if type is `insert` it updates `nodeToBeFocused` with the passed HTML node, and schedules the private `setFocus` method
+      - if type is other than `insert` and `nodeToBeFocused` is not `null`, it bails out.
+      - otherwise, it updates `nodeToBeFocused` with the passed HTML node, and schedules the private `setFocus` method, in the `afterRender` queue.
 
 Contributing
 ------------------------------------------------------------------------------
