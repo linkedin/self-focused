@@ -12,11 +12,6 @@ export default Component.extend({
     this.get('focusManager').updateIsFirstRender();
   },
 
-  didInsertElement() {
-    this._super(...arguments);
-    this.get('focusManager').setNodeToBeFocused(this.element, 'insert');
-  },
-
   /**
    * although the content of didReceiveAttrs is almost same as didInsertElement
    * it is required for scenarios when render happens due to attribute/model changes
@@ -30,7 +25,17 @@ export default Component.extend({
      * as it is yet to be inserted in the DOM
      */
     if (this.element) {
-      this.get('focusManager').setNodeToBeFocused(this.element, 'attr');
+      this.get('focusManager').setNodeToBeFocused(this.element);
     }
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+    this.get('focusManager').setNodeToBeFocused(this.element, 'insert');
+  },
+
+  didRender() {
+    this._super(...arguments);
+    this.get('focusManager').setNodeToBeFocused(this.element);
   }
 });
