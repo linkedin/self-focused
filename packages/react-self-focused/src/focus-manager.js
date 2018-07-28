@@ -79,13 +79,15 @@ class FocusManager {
         if (isFirstRender) {
           return;
         }
-        // Mount: focus the top most mounted self-focused div
+        // if type is mount: focus the top most inserted self-focused div
+        // the very last self-focused div passed to this method for this render cycle wins
         if (type === 'mount') {
           nodeToBeFocused = node;
           setFocus();
           return;
         }
-        // Update: focus the child most updated self-focused div
+        // if the type is not mount: focus the child most updated self-focused div
+        // the very first self-focused div passed to this method for this render cycle wins
         if (nodeToBeFocused) {
           return;
         }
