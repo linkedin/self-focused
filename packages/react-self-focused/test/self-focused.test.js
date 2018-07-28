@@ -81,7 +81,7 @@ describe('<SelfFocused />', () => {
     });
   });
 
-  it('should focus the top most self-focused div on render', done => {
+  it('should focus the top most self-focused div on mount', done => {
     mount(
       <div id="one">
         <SelfFocused>
