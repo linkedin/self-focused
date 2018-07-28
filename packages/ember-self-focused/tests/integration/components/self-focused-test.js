@@ -1,6 +1,5 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { run } from '@ember/runloop';
 import { render} from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -100,17 +99,11 @@ module('Integration | Component | self-focused', function(hooks) {
     assert.equal(selfFocusedDiv.getAttribute('tabindex'), '-1', 'self-focused <div> has a tabindex property with value -1');
     assert.equal(selfFocusedDiv, document.activeElement, 'self-focused <div> is the currently focused element');
 
-    run(() => {
-      run.scheduleOnce('afterRender', () => {
-        selfFocusedDiv.addEventListener('blur', () => {
-          run(() => {
-            assert.notOk(selfFocusedDiv.getAttribute('tabindex'), 'self-focused <div> does not have a tabindex property');
-            assert.equal(document.body, document.activeElement, 'document.body is the currently focused element');
-          })
-        })
-        selfFocusedDiv.blur();
-      })
-    });
+    selfFocusedDiv.addEventListener('click', () => {
+      assert.notOk(selfFocusedDiv.getAttribute('tabindex'), 'self-focused <div> does not have a tabindex property');
+      assert.equal(document.body, document.activeElement, 'document.body is the currently focused element');
+    })
+    selfFocusedDiv.blur();
   });
 
   test('it should remove the tabindex property when self-focused <div> is clicked', async function(assert) {
@@ -138,17 +131,11 @@ module('Integration | Component | self-focused', function(hooks) {
     assert.equal(selfFocusedDiv.getAttribute('tabindex'), '-1', 'self-focused <div> has a tabindex property with value -1');
     assert.equal(selfFocusedDiv, document.activeElement, 'self-focused <div> is the currently focused element');
 
-    run(() => {
-      run.scheduleOnce('afterRender', () => {
-        selfFocusedDiv.addEventListener('click', () => {
-          run(() => {
-            assert.notOk(selfFocusedDiv.getAttribute('tabindex'), 'self-focused <div> does not have a tabindex property');
-            assert.equal(document.body, document.activeElement, 'document.body is the currently focused element');
-          })
-        })
-        selfFocusedDiv.click();
-      })
-    });
+    selfFocusedDiv.addEventListener('click', () => {
+      assert.notOk(selfFocusedDiv.getAttribute('tabindex'), 'self-focused <div> does not have a tabindex property');
+      assert.equal(document.body, document.activeElement, 'document.body is the currently focused element');
+    })
+    selfFocusedDiv.click();
   });
 
   test('it should focus the top most self-focused div on insert', async function(assert) {
