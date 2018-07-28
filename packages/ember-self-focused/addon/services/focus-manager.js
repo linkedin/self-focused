@@ -36,7 +36,7 @@ export default Service.extend({
    *
    * @param {HTMLNode} node - node to be focused
    */
-  setNodeToBeFocused(node, type) {
+  nominateNodeToBeFocused(node, type) {
     if (this._isFirstRender) {
       return;
     }

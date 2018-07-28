@@ -25,17 +25,17 @@ export default Component.extend({
      * as it is yet to be inserted in the DOM
      */
     if (this.element) {
-      this.get('focusManager').setNodeToBeFocused(this.element);
+      this.get('focusManager').nominateNodeToBeFocused(this.element);
     }
   },
 
   didInsertElement() {
     this._super(...arguments);
-    this.get('focusManager').setNodeToBeFocused(this.element, 'insert');
+    this.get('focusManager').nominateNodeToBeFocused(this.element, 'insert');
   },
 
   didRender() {
     this._super(...arguments);
-    this.get('focusManager').setNodeToBeFocused(this.element);
+    this.get('focusManager').nominateNodeToBeFocused(this.element);
   }
 });

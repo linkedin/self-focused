@@ -75,7 +75,7 @@ class FocusManager {
        * @param {HTMLNode} node - node to be focused
        * @param {string} type - type of operation mount/update
        */
-      this.setNodeToBeFocused = function (node, type) {
+      this.nominateNodeToBeFocused = function (node, type) {
         if (isFirstRender) {
           return;
         }

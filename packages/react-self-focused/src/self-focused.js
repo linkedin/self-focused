@@ -15,11 +15,11 @@ class SelfFocused extends React.Component {
   }
 
   componentDidMount() {
-    this.focusManager.setNodeToBeFocused(this.ref.current, 'mount');
+    this.focusManager.nominateNodeToBeFocused(this.ref.current, 'mount');
   }
 
   componentDidUpdate() {
-    this.focusManager.setNodeToBeFocused(this.ref.current, 'update');
+    this.focusManager.nominateNodeToBeFocused(this.ref.current, 'update');
   }
 }
 
