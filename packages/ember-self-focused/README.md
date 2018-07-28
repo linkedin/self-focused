@@ -29,12 +29,6 @@ Add the `self-focused` component to all the desired templates/component correspo
   <!-- html block to be yielded -->
 {{/self-focused}}
 ```
-if the `html block to be yielded` is a component and accepting attributes to act upon, the same attribute needs to be passed to the `self-focus` component.
-```html
-{{#self-focused foo=bar}}
-  <!-- {{custom-component foo=bar}} -->
-{{/self-focused}}
-```
 
 Since the div will be focused, it will have a focus outline/highlight, if that is not desired, please add the following styles:
 

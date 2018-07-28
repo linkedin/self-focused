@@ -46,34 +46,6 @@ module('Integration | Component | self-focused', function(hooks) {
     assert.equal(selfFocusedDiv, document.activeElement, 'self-focused <div> is the currently focused element');
   });
 
-  test('it should focus the self-focused div on receiving attributes', async function(assert) {
-    this.set('foo', null);
-
-    await render(hbs`
-      <button id="dummy">dummy</button>
-      <div id="container">
-        {{#self-focused foo=foo}}
-          template block text
-        {{/self-focused}}
-      </div>
-    `);
-    let selfFocusedDiv = this.element.querySelector('#container > div');
-
-    assert.notOk(selfFocusedDiv.getAttribute('tabindex'), 'self-focused <div> does not have a tabindex property');
-    assert.equal(document.body, document.activeElement, 'document.body is the currently focused element');
-
-    let button = this.element.querySelector('button');
-    button.focus();
-
-    assert.equal(button, document.activeElement, 'dummy <button> is the currently focused element');
-
-    this.set('foo', 'bar');
-
-    selfFocusedDiv = this.element.querySelector('#container > div');
-    assert.equal(selfFocusedDiv.getAttribute('tabindex'), '-1', 'self-focused <div> has a tabindex property with value -1');
-    assert.equal(selfFocusedDiv, document.activeElement, 'self-focused <div> is the currently focused element');
-  });
-
   test('it should remove the tabindex property when self-focused <div> blurs', async function(assert) {
     await render(hbs`
       <div id="container">
@@ -138,7 +110,7 @@ module('Integration | Component | self-focused', function(hooks) {
     selfFocusedDiv.click();
   });
 
-  test('it should focus the top most self-focused div on insert', async function(assert) {
+  test('it should focus the top most self-focused div on initial render', async function(assert) {
     await render(hbs`
       <div id="container">
         {{#self-focused}}
@@ -168,7 +140,7 @@ module('Integration | Component | self-focused', function(hooks) {
     assert.equal(selfFocusedDiv, document.activeElement, 'self-focused <div> one is the currently focused element');
   });
 
-  test('it should focus the child most self-focused div on receiving attribute', async function(assert) {
+  test('it should focus the child most self-focused div on re-render', async function(assert) {
     this.set('one', null);
     this.set('two', null);
     this.set('three', null);
