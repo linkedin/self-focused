@@ -7,20 +7,26 @@ import Service from '@ember/service';
  */
 
 export default Service.extend({
-  /**
-   * @property {boolean} isFirstRender - determines whether it is a first render
-   * @private
-   */
-  isFirstRender: true,
-
-  /**
-   * @property {HTMLNode} nodeToBeFocused - node to be focused
-   * @private
-   */
-  nodeToBeFocused: null,
 
   init() {
     this._super(...arguments);
+
+    /**
+    * @property {boolean} _isFirstRender - determines whether it is a first render
+    * @private
+    */
+    this._isFirstRender = true;
+
+    /**
+     * @property {HTMLNode} _nodeToBeFocused - node to be focused
+     * @private
+     */
+    this._nodeToBeFocused = null;
+
+    /**
+     * this bound _removeTabIndex
+     * @private
+     */
     this._removeTabIndex = this._removeTabIndex.bind(this);
   },
 
@@ -31,45 +37,45 @@ export default Service.extend({
    * @param {HTMLNode} node - node to be focused
    */
   setNodeToBeFocused(node, type) {
-    if (this.get('isFirstRender')) {
+    if (this._isFirstRender) {
       return;
     }
 
-    // Insert: focus the top most inserted self-focused div
+    // if type is insert: focus the top most inserted self-focused div
+    // the very last self-focused div passed to this method for this render cycle wins
     if (type === 'insert') {
-      this.set('nodeToBeFocused', node);
+      this._nodeToBeFocused = node;
       run.scheduleOnce('afterRender', this, this._setFocus);
       return;
     }
-    // Attr: focus the child most updated self-focused div
-    if (this.get('nodeToBeFocused')) {
+    // if the type is not insert: focus the child most updated self-focused div
+    // the very first self-focused div passed to this method for this render cycle wins
+    if (this._nodeToBeFocused) {
       return;
     }
-    this.set('nodeToBeFocused', node);
+    this._nodeToBeFocused = node;
     run.scheduleOnce('afterRender', this, this._setFocus);
   },
 
   /**
-   * Use this method to set isFirstRender to false.
+   * Use this method to set _isFirstRender to false.
    */
   updateIsFirstRender() {
-    if (this.get('isFirstRender')) {
-      run.scheduleOnce('afterRender', this, function() {
-        this.set('isFirstRender', false);
-      });
+    if (this._isFirstRender) {
+      run.scheduleOnce('afterRender', this, this.set, '_isFirstRender', false);
     }
   },
 
   /**
-   * if nodeToBeFocused has been set
+   * if _nodeToBeFocused has been set
    * then
    * add tabindex=-1 to the node
    * focus the node
    * attach _removeTabIndex as an eventListener to the node
-   * update the nodeToBeFocused to `null`
+   * update the _nodeToBeFocused to `null`
    */
   _setFocus() {
-    const node = this.get('nodeToBeFocused');
+    const node = this._nodeToBeFocused;
     if (node) {
       // save current scroll position so setting focus does not
       // disrupt the user's placement on the page
@@ -83,7 +89,7 @@ export default Service.extend({
       // thus removing the tabindex on blur or click
       node.addEventListener('blur', this._removeTabIndex);
       node.addEventListener('click', this._removeTabIndex);
-      this.set('nodeToBeFocused', null);
+      this._nodeToBeFocused = null;
     }
   },
 
