@@ -40,7 +40,8 @@ export default Service.extend({
     if (this._isFirstRender) {
       return;
     }
-
+    // the render order starts from the child most to the top most
+    // thus
     // if type is insert: focus the top most inserted self-focused div
     // the very last self-focused div passed to this method for this render cycle wins
     if (type === 'insert') {
@@ -48,6 +49,8 @@ export default Service.extend({
       run.scheduleOnce('afterRender', this, this._setFocus);
       return;
     }
+    // the render order starts from the child most to the top most
+    // thus
     // if the type is not insert: focus the child most updated self-focused div
     // the very first self-focused div passed to this method for this render cycle wins
     if (this._nodeToBeFocused) {
