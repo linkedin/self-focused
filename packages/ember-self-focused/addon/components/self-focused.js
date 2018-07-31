@@ -9,16 +9,15 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    this.get('focusManager').updateIsFirstRender();
   },
 
   didInsertElement() {
     this._super(...arguments);
-    this.get('focusManager').nominateNodeToBeFocused(this.element, 'insert');
+    this.get('focusManager').didInsertElement(this.element);
   },
 
   didRender() {
     this._super(...arguments);
-    this.get('focusManager').nominateNodeToBeFocused(this.element);
+    this.get('focusManager').didRenderElement(this.element);
   }
 });

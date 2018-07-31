@@ -28,45 +28,34 @@ export default Service.extend({
      * @private
      */
     this._removeTabIndex = this._removeTabIndex.bind(this);
+
+    run.scheduleOnce('afterRender', this, this.set, '_isFirstRender', false);
   },
 
-  /**
-   * Use this method to set the node to be focused.
-   * It will be focused if no node has already been set and is not the first render.
-   *
-   * @param {HTMLNode} node - node to be focused
-   */
-  nominateNodeToBeFocused(node, type) {
+  didInsertElement(node) {
+    if (this._isFirstRender) {
+      return;
+    }
+    // the insert order starts from the child most to the top most
+    // thus
+    // the very last self-focused div passed to this method for this render cycle wins
+    this._nodeToBeFocused = node;
+    run.scheduleOnce('afterRender', this, this._setFocus);
+  },
+
+  didRenderElement(node) {
     if (this._isFirstRender) {
       return;
     }
     // the render order starts from the child most to the top most
     // thus
-    // if type is insert: focus the top most inserted self-focused div
-    // the very last self-focused div passed to this method for this render cycle wins
-    if (type === 'insert') {
-      this._nodeToBeFocused = node;
-      run.scheduleOnce('afterRender', this, this._setFocus);
-      return;
-    }
-    // the render order starts from the child most to the top most
-    // thus
-    // if the type is not insert: focus the child most updated self-focused div
     // the very first self-focused div passed to this method for this render cycle wins
+    // if and only if _nodeToBeFocused was null when this method was invoked.
     if (this._nodeToBeFocused) {
       return;
     }
     this._nodeToBeFocused = node;
     run.scheduleOnce('afterRender', this, this._setFocus);
-  },
-
-  /**
-   * Use this method to set _isFirstRender to false.
-   */
-  updateIsFirstRender() {
-    if (this._isFirstRender) {
-      run.scheduleOnce('afterRender', this, this.set, '_isFirstRender', false);
-    }
   },
 
   /**

@@ -58,40 +58,43 @@ class FocusManager {
       };
 
       /**
-       * Use this method to set isFirstRender to false.
+       * Set isFirstRender to false
        */
-      this.updateIsFirstRender = function () {
-        if (isFirstRender) {
-          raf(() => {
-            isFirstRender = false;
-          });
-        }
-      };
+      raf(() => {
+        isFirstRender = false;
+      });
 
       /**
-       * Use this method to set the node to be focused.
+       * Use this method to set the node to be focused on componentDidMount.
        * It will be focused if no node has already been set and is not the first render.
        *
        * @param {HTMLNode} node - node to be focused
-       * @param {string} type - type of operation mount/update
        */
-      this.nominateNodeToBeFocused = function (node, type) {
+      this.componentDidMount = function (node) {
         if (isFirstRender) {
           return;
         }
         // The render order starts from the child most to the top most
         // thus
-        // if type is mount: focus the top most inserted self-focused div
-        // the very last self-focused div passed to this method for this render cycle wins
-        if (type === 'mount') {
-          nodeToBeFocused = node;
-          setFocus();
+        // for the initial render the very last self-focused div passed to this method for this render cycle wins
+        nodeToBeFocused = node;
+        setFocus();
+      };
+
+      /**
+       * Use this method to set the node to be focused on componentDidUpdate.
+       * It will be focused if no node has already been set and is not the first render.
+       *
+       * @param {HTMLNode} node - node to be focused
+       */
+      this.componentDidUpdate = function (node) {
+        if (isFirstRender) {
           return;
         }
         // The render order starts from the child most to the top most
         // thus
-        // if the type is not mount: focus the child most updated self-focused div
         // the very first self-focused div passed to this method for this render cycle wins
+        // if and only if _nodeToBeFocused was null when this method was invoked.
         if (nodeToBeFocused) {
           return;
         }

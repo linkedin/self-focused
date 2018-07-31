@@ -7,7 +7,6 @@ class SelfFocused extends React.Component {
     super(props);
     this.ref = React.createRef();
     this.focusManager = new FocusManager();
-    this.focusManager.updateIsFirstRender();
   }
 
   render() {
@@ -15,11 +14,11 @@ class SelfFocused extends React.Component {
   }
 
   componentDidMount() {
-    this.focusManager.nominateNodeToBeFocused(this.ref.current, 'mount');
+    this.focusManager.componentDidMount(this.ref.current);
   }
 
   componentDidUpdate() {
-    this.focusManager.nominateNodeToBeFocused(this.ref.current, 'update');
+    this.focusManager.componentDidUpdate(this.ref.current);
   }
 }
 
