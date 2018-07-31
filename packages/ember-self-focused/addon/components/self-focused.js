@@ -7,10 +7,6 @@ export default Component.extend({
   focusManager: service(),
   classNames: ['self-focused'],
 
-  init() {
-    this._super(...arguments);
-  },
-
   didInsertElement() {
     this._super(...arguments);
     this.get('focusManager').didInsertElement(this.element);
