@@ -1,7 +1,7 @@
 {
   "name": "react-self-focused",
   "version": "0.1.1",
-  "description": "make an ember application screen reader friendly",
+  "description": "make a react application screen reader friendly",
   "keywords": [
     "react",
     "component",
