@@ -60,28 +60,26 @@ a.active after {
 
 Implementation overview
 ------------------------------------------------------------------------------
-- `self-focused` component
-  - on initialization invokes `updateIsFirstRender` method of the `focus-manager`.
-  - on `componentDidMount` and `componentDidUpdate` invokes the `setNodeToBeFocused` method of the `focus-manager`, passing the self HTML node and the type of operation (`mount` or `update`) as the arguments.
+
+- `self-focused` component on initial render invokes the `componentDidMount` and on re-render invokes the `componentDidUpdate` method of the `focus-manager` respectively passing the self HTML node as argument .
 - `focus-manager` carries out the functionality of focusing the desired node.
   - `focus-manager` utilizes two state variables, namely `isFirstRender` and `nodeToBeFocused`.
     - initial value of the `isFirstRender` is set to `true`
     - initial value of the `nodeToBeFocused` is set to `null`
+  - `focus-manager` on initialization schedules `isFirstRender` to be set to `false`in the with `requestAnimationFrame()`.
   - `focus-manager` has two private methods namely `setFocus` and `removeTabIndex`.
     - `setFocus` method
       - adds `tabindex=-1` to the `nodeToBeFocused`
       - invokes native `focus()` method on it
       - attaches `removeTabIndex` method to the `nodeToBeFocused` as the `click` and `blur` event handler
       - sets `nodeToBeFocused` to `null`
-    - `removeTabIndex` method, removes the `tabindex`, `click` and `blur` event handler from `nodeToBeFocused`
-  - `focus-manager` exposes  two methods, namely `updateIsFirstRender` and `setNodeToBeFocused`, which are consumed by `self-focused` component.
-    - `updateIsFirstRender` sets `isFirstRender` to `false` if it is not already.
-    - `setNodeToBeFocused` method
-      - accepts a HTML node and type as arguments.
-      - verifies the state of `isFirstRender` and if `isFirstRender` is `true`, which is the case for very first invocation, it bails out.
-      - if type is `mount` it updates `nodeToBeFocused` with the passed HTML node, and schedules the private `setFocus` method
-      - if type is other than `mount` and `nodeToBeFocused` is not `null`, it bails out.
-      - otherwise, it updates `nodeToBeFocused` with the passed HTML node, and schedules the private `setFocus` method with `requestAnimationFrame()`.
+    - `removeTabIndex` method, removes the `tabindex`, `click` and `blur` event handlers from `nodeToBeFocused`
+  - `focus-manager` exposes two methods, namely `componentDidMount` and `componentDidUpdate`, which are consumed by `self-focused` component.
+    - `componentDidMount` and `componentDidUpdate` both accept a HTML node as an argument.
+    - `componentDidMount` and `componentDidUpdate` both bail out if `isFirstRender` is true.
+    - for `componentDidMount` the very last `self-focused` div passed to it for the render cycle wins
+    - for `componentDidUpdate` the very first `self-focused` div passed to `componentDidMount` for the render cycle wins, if and only if `nodeToBeFocused` was null when this method was invoked.
+    - `componentDidMount` and `componentDidUpdate` both schedule the private `setFocus` method, in the `afterRender` queue after if `nodeToBeFocused` was updated.
 
 Contributing
 ------------------------------------------------------------------------------

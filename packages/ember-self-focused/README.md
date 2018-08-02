@@ -56,28 +56,25 @@ a.active after {
 Implementation overview
 ------------------------------------------------------------------------------
 
-- `self-focused` component
-  - on initialization invokes `updateIsFirstRender` method of the `focus-manager` service.
-  - on `didInsertElement` and `didReceiveAttrs` invokes the `setNodeToBeFocused` method of the `focus-manager`, passing the self HTML node and the type of operation (`insert` or `attr`) as the arguments.
+- `self-focused` component on initial render invokes the `didInsertElement` and on re-render invokes the `didRenderElement` method of the `focus-manager` respectively passing the self HTML node as argument .
 - `focus-manager` service carries out the functionality of focusing the desired node.
-  - `focus-manager` utilizes two state variables, namely `isFirstRender` and `nodeToBeFocused`.
-    - initial value of the `isFirstRender` is set to `true`
-    - initial value of the `nodeToBeFocused` is set to `null`
+  - `focus-manager` utilizes two state variables, namely `_isFirstRender` and `_nodeToBeFocused`.
+    - initial value of the `_isFirstRender` is set to `true`
+    - initial value of the `_nodeToBeFocused` is set to `null`
+  - `focus-manager` on initialization schedules `_isFirstRender` to be set to `false`in the `afterRender` queue.
   - `focus-manager` has two private methods namely `_setFocus` and `_removeTabIndex`.
     - `_setFocus` method
       - adds `tabindex=-1` to the `nodeToBeFocused`
       - invokes native `focus()` method on it
-      - attaches `_removeTabIndex` method to the `nodeToBeFocused` as the `click` and `blur` event handler
-      - sets `nodeToBeFocused` to `null`
-    - `_removeTabIndex` method, removes the `tabindex`, `click` and `blur` event handler from `nodeToBeFocused`
-  - `focus-manager` service exposes  two methods, namely `updateIsFirstRender` and `setNodeToBeFocused`, which are consumed by `self-focused` component.
-    - `updateIsFirstRender` sets `isFirstRender` to `false` if it is not already.
-    - `setNodeToBeFocused` method
-      - accepts a HTML node and type as arguments.
-      - verifies the state of `isFirstRender` and if `isFirstRender` is `true`, which is the case for very first invocation, it bails out.
-      - if type is `insert` it updates `nodeToBeFocused` with the passed HTML node, and schedules the private `setFocus` method
-      - if type is other than `insert` and `nodeToBeFocused` is not `null`, it bails out.
-      - otherwise, it updates `nodeToBeFocused` with the passed HTML node, and schedules the private `setFocus` method, in the `afterRender` queue.
+      - attaches `_removeTabIndex` method to the `_nodeToBeFocused` as the `click` and `blur` event handler
+      - sets `_nodeToBeFocused` to `null`
+    - `_removeTabIndex` method, removes the `tabindex`, `click` and `blur` event handlers from `nodeToBeFocused`
+  - `focus-manager` service exposes two methods, namely `didInsertElement` and `didRenderElement`, which are consumed by `self-focused` component.
+    - `didInsertElement` and `didRenderElement` both accept a HTML node as an argument.
+    - `didInsertElement` and `didRenderElement` both bail out if `_isFirstRender` is true.
+    - for `didInsertElement` the very last `self-focused` div passed to it for the render cycle wins
+    - for `didRenderElement` the very first `self-focused` div passed to `didInsertElement` for the render cycle wins, if and only if `_nodeToBeFocused` was null when this method was invoked.
+    - `didInsertElement` and `didRenderElement` both schedule the private `setFocus` method, in the `afterRender` queue after if `_nodeToBeFocused` was updated.
 
 Contributing
 ------------------------------------------------------------------------------
