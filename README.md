@@ -1,3 +1,6 @@
+
+<img src="logo/black-on-transparent.png" style="max-width: 100%" alt="">
+
 self-focused
 ==============================================================================
 
