@@ -22,7 +22,7 @@ Getting Started
 
 ## Installation
 
-* `git clone git@gitli.corp.linkedin.com:sarbbottam/self-focused.git`
+* `git clone git@github.com:linkedin/self-focused.git`
 * `cd self-focused`
 * `npm install`
 * `npm run bootstrap`
