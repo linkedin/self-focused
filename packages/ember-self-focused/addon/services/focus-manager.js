@@ -69,7 +69,7 @@ export default Service.extend({
   _setFocus() {
     const node = this._nodeToBeFocused;
     if (node) {
-      // save current scroll position so setting focus does not
+      // save current scroll position, so setting focus does not
       // disrupt the user's placement on the page
       const scrollX = window.pageXOffset;
       const scrollY = window.pageYOffset;
@@ -77,7 +77,7 @@ export default Service.extend({
       node.focus();
       // after setting focus, scroll back to the place where the user was previously
       window.scrollTo(scrollX, scrollY);
-      // mouse click on a element with tabindex=-1 focues the element
+      // mouse click on a element with tabindex=-1 focuses the element
       // thus removing the tabindex on blur or click
       node.addEventListener('blur', this._removeTabIndex);
       node.addEventListener('click', this._removeTabIndex);

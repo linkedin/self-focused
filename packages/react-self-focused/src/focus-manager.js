@@ -40,7 +40,7 @@ class FocusManager {
       const setFocus = function () {
         raf(() => {
           if (nodeToBeFocused) {
-            // Save current scroll position so setting focus does not
+            // Save current scroll position, so setting focus does not
             // disrupt the user's placement on the page
             const scrollX = window.pageXOffset;
             const scrollY = window.pageYOffset;
@@ -48,7 +48,7 @@ class FocusManager {
             nodeToBeFocused.focus();
             // After setting focus, scroll back to the place where the user was previously
             window.scrollTo(scrollX, scrollY);
-            // Mouse click on a element with tabindex=-1 focues the element
+            // Mouse click on a element with tabindex=-1 focuses the element
             // thus removing the tabindex on blur or click
             nodeToBeFocused.addEventListener('blur', removeTabIndex);
             nodeToBeFocused.addEventListener('click', removeTabIndex);
