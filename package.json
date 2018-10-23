@@ -4,7 +4,13 @@
   "version": "0.0.0",
   "description": "self-focused component for ember/react et al",
   "keywords": [
-    "ember", "react", "component", "a11y", "accessibility", "spa", "single page application"
+    "ember",
+    "react",
+    "component",
+    "a11y",
+    "accessibility",
+    "spa",
+    "single page application"
   ],
   "repository": {
     "type": "git",
