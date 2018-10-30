@@ -1,5 +1,6 @@
 import { run } from '@ember/runloop';
 import Service from '@ember/service';
+import raf from 'raf';
 
 /**
  * Focus manager service
@@ -29,7 +30,9 @@ export default Service.extend({
      */
     this._removeTabIndex = this._removeTabIndex.bind(this);
 
-    run.scheduleOnce('afterRender', this, this.set, '_isFirstRender', false);
+    raf(() => {
+      this.set('_isFirstRender', false);
+    });
   },
 
   didInsertElement(node) {
@@ -40,7 +43,10 @@ export default Service.extend({
     // thus
     // the very last self-focused div passed to this method for this render cycle wins
     this._nodeToBeFocused = node;
-    run.scheduleOnce('afterRender', this, this._setFocus);
+
+    raf(() => {
+      this._setFocus();
+    });
   },
 
   didRenderElement(node) {
@@ -55,7 +61,10 @@ export default Service.extend({
       return;
     }
     this._nodeToBeFocused = node;
-    run.scheduleOnce('afterRender', this, this._setFocus);
+
+    raf(() => {
+      this._setFocus();
+    });
   },
 
   /**
