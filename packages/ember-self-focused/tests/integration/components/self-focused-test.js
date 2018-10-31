@@ -141,6 +141,7 @@ module('Integration | Component | self-focused', function(hooks) {
   });
 
   test('it should focus the child most self-focused div on re-render', async function(assert) {
+    const done = assert.async();
     this.set('one', null);
     this.set('two', null);
     this.set('three', null);
@@ -158,21 +159,25 @@ module('Integration | Component | self-focused', function(hooks) {
     `);
 
     this.set('one', 'foo');
+    requestAnimationFrame(() => {
+      let selfFocusedDiv = this.element.querySelector('#container .one');
+      assert.equal(selfFocusedDiv.getAttribute('tabindex'), '-1', 'self-focused <div> one has a tabindex property with value -1');
+      assert.equal(selfFocusedDiv, document.activeElement, 'self-focused <div> one is the currently focused element');
 
-    let selfFocusedDiv = this.element.querySelector('#container .one');
-    assert.equal(selfFocusedDiv.getAttribute('tabindex'), '-1', 'self-focused <div> one has a tabindex property with value -1');
-    assert.equal(selfFocusedDiv, document.activeElement, 'self-focused <div> one is the currently focused element');
+      this.set('two', 'foo');
+      requestAnimationFrame(() => {
+        selfFocusedDiv = this.element.querySelector('#container .two');
+        assert.equal(selfFocusedDiv.getAttribute('tabindex'), '-1', 'self-focused <div> two has a tabindex property with value -1');
+        assert.equal(selfFocusedDiv, document.activeElement, 'self-focused <div> two is the currently focused element');
 
-    this.set('two', 'foo');
-
-    selfFocusedDiv = this.element.querySelector('#container .two');
-    assert.equal(selfFocusedDiv.getAttribute('tabindex'), '-1', 'self-focused <div> two has a tabindex property with value -1');
-    assert.equal(selfFocusedDiv, document.activeElement, 'self-focused <div> two is the currently focused element');
-
-    this.set('three', 'foo');
-
-    selfFocusedDiv = this.element.querySelector('#container .three');
-    assert.equal(selfFocusedDiv.getAttribute('tabindex'), '-1', 'self-focused <div> three has a tabindex property with value -1');
-    assert.equal(selfFocusedDiv, document.activeElement, 'self-focused <div> three is the currently focused element');
+        this.set('three', 'foo');
+        requestAnimationFrame(() => {
+          selfFocusedDiv = this.element.querySelector('#container .three');
+          assert.equal(selfFocusedDiv.getAttribute('tabindex'), '-1', 'self-focused <div> three has a tabindex property with value -1');
+          assert.equal(selfFocusedDiv, document.activeElement, 'self-focused <div> three is the currently focused element');
+          done();
+        });
+      });
+    });
   });
 });
