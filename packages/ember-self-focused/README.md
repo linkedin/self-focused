@@ -37,6 +37,34 @@ Since the div will be focused, it will have a focus outline/highlight, if that i
 }
 ```
 
+If there are tests in the consuming application that is testing `div.self-focused` to be the `document.activeElement` as a result of `set`, please use `settled` like so:
+
+```js
+import { render, settled} from '@ember/test-helpers';
+...
+
+module('some module', function(hooks) {
+  ...
+
+  test('some test', async function(assert) {
+    this.set('one', null);
+
+    await render(hbs`
+      <div id="container">
+        {{#self-focused class="one" one=one}}
+          template block text
+        {{/self-focused}}
+      </div>
+    `);
+
+    this.set('one', 'foo');
+    await settled();
+    let selfFocusedDiv = this.element.querySelector('#container .one');
+    assert.equal(selfFocusedDiv.getAttribute('tabindex'), '-1', 'self-focused <div> one has a tabindex property with value -1');
+  });
+}
+```
+
 Implementation overview
 ------------------------------------------------------------------------------
 
