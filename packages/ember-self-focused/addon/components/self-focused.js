@@ -1,11 +1,15 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
 import layout from '../templates/components/self-focused';
 
 export default Component.extend({
   layout,
+  fastboot: service(),
   focusManager: service(),
   classNames: ['self-focused'],
+
+  isFastBoot: computed.reads('fastboot.isFastBoot'),
 
   init() {
     this._super(...arguments);
@@ -29,7 +33,7 @@ export default Component.extend({
      * and for the very first invocation, the corresponding element is not available
      * as it is yet to be inserted in the DOM
      */
-    if (this.element) {
+    if (!this.get('isFastBoot') && this.element) {
       this.get('focusManager').setNodeToBeFocused(this.element, 'attr');
     }
   }
