@@ -4,7 +4,7 @@ import layout from '../templates/components/self-focused';
 
 export default Component.extend({
   layout,
-  focusManager: service(),
+  focusManager: service('focus-manager'),
   classNames: ['self-focused'],
 
   didInsertElement() {
