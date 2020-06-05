@@ -6,7 +6,7 @@ import layout from '../templates/components/self-focused';
 export default Component.extend({
   layout,
   fastboot: service(),
-  focusManager: service(),
+  focusManager: service('focus-manager'),
   classNames: ['self-focused'],
 
   isFastBoot: computed.reads('fastboot.isFastBoot'),
