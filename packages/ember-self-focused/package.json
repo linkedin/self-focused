@@ -22,7 +22,7 @@
     "test": "npm run lint && ember try:each"
   },
   "dependencies": {
-    "ember-cli-babel": "^6.6.0",
+    "ember-cli-babel": "^7.22.1",
     "ember-cli-htmlbars": "^2.0.3"
   },
   "devDependencies": {
@@ -50,7 +50,7 @@
     "loader.js": "^4.2.3"
   },
   "engines": {
-    "node": "^4.5 || 6.* || >= 7.*"
+    "node": ">= 10.*"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
