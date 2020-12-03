@@ -1,6 +1,6 @@
 {
   "name": "ember-self-focused",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "make an ember application screen reader friendly",
   "keywords": [
     "ember-addon",
