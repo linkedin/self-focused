@@ -1,13 +1,6 @@
+import { run } from '@ember/runloop';
 import Service from '@ember/service';
-import { registerWaiter } from '@ember/test';
-import { DEBUG } from '@glimmer/env';
 
-let activeScheduledTasks = 0;
-
-if (DEBUG) {
-  // wait until no active rafs
-  registerWaiter(() => activeScheduledTasks === 0);
-}
 /**
  * Focus manager service
  * This service is intended to be used by self-focused component
@@ -36,11 +29,7 @@ export default Service.extend({
      */
     this._removeTabIndex = this._removeTabIndex.bind(this);
 
-    activeScheduledTasks++;
-    requestAnimationFrame(() => {
-      activeScheduledTasks--;
-      this._isFirstRender = false;
-    })
+    run.scheduleOnce('afterRender', this, this.set, '_isFirstRender', false);
   },
 
   didInsertElement(node) {
@@ -51,12 +40,7 @@ export default Service.extend({
     // thus
     // the very last self-focused div passed to this method for this render cycle wins
     this._nodeToBeFocused = node;
-
-    activeScheduledTasks++;
-    requestAnimationFrame(() => {
-      activeScheduledTasks--;
-      this._setFocus()
-    })
+    run.scheduleOnce('afterRender', this, this._setFocus);
   },
 
   didRenderElement(node) {
@@ -71,12 +55,7 @@ export default Service.extend({
       return;
     }
     this._nodeToBeFocused = node;
-
-    activeScheduledTasks++;
-    requestAnimationFrame(() => {
-      activeScheduledTasks--;
-      this._setFocus()
-    })
+    run.scheduleOnce('afterRender', this, this._setFocus);
   },
 
   /**
