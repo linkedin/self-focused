@@ -46,8 +46,12 @@ class FocusManager {
             const scrollY = window.pageYOffset;
             nodeToBeFocused.setAttribute('tabindex', '-1');
             nodeToBeFocused.focus();
-            // After setting focus, scroll back to the place where the user was previously
-            window.scrollTo(scrollX, scrollY);
+            // After setting focus, scroll back to the place where the user was previously.
+            // We are now using document.body.scrollLeft/scrollTop rather than window.scrollTo
+            // because in Safari 12 there is an issue where the scroll that happens internally
+            // from focusing clobbers window.scrollTo
+            document.body.scrollLeft = scrollX;
+            document.body.scrollTop = scrollY;
             // Mouse click on a element with tabindex=-1 focuses the element
             // thus removing the tabindex on blur or click
             nodeToBeFocused.addEventListener('blur', removeTabIndex);
